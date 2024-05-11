@@ -4,10 +4,20 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./src/app.js"
+    "dev": "nodemon ./src/app.js",
+    "start": "node ./src/app.js"
   },
   "keywords": [],
   "author": "Gabriel Ferrin",
   "license": "ISC",
-  "description": "Projecto final de blogging del segundo nivel de FUNVAL | Desarrollo Fullstack"
+  "description": "Projecto final de Blogging del segundo nivel de FUNVAL | Desarrollo Fullstack",
+  "devDependencies": {
+    "standard": "^17.1.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  },
+  "dependencies": {
+    "mysql2": "^3.9.7"
+  }
 }
