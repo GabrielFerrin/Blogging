@@ -4,9 +4,10 @@ import {
   getUserByID,
   getUserByUsername,
   getUserByEmail
-} from '../controllers/user/general.controller.js'
-import { addUser } from '../controllers/user/add-user.controller.js'
-import { deleteUser } from '../controllers/user/delete-user.controller.js'
+} from '../controllers/user/user-general.controller.js'
+import { addUser } from '../controllers/user/user-add.controller.js'
+import { deleteUser } from '../controllers/user/user-delete.controller.js'
+import { updateUser } from '../controllers/user/user-update.controller.js'
 
 const router = Router()
 
@@ -17,6 +18,8 @@ router.get('/get-user-username/:username', getUserByUsername)
 router.get('/get-user-email/:email', getUserByEmail)
 // POST
 router.post('/add-user', addUser)
+// PATCH
+router.patch('/update-user/:id', updateUser)
 // DELETE
 router.delete('/delete-user/:id', deleteUser)
 

@@ -20,6 +20,7 @@ export const getUserByID = async (req, res) => {
   try {
     const query = 'SELECT * FROM user WHERE user_id = ?'
     const [rows] = await pool.execute(query, [id])
+    console.log(rows)
     if (rows.length) res.json({ message: rows[0] })
     else res.status(404).json({ message: 'El usuario no existe' })
   } catch (error) {
