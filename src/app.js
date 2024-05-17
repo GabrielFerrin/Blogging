@@ -1,4 +1,6 @@
 import express from 'express'
+import morgan from 'morgan'
+// internal imports
 import { PORT } from './config.js'
 import removeHeader from './middleware.js'
 // routes imports
@@ -7,7 +9,9 @@ import postRoutes from './routes/post.routes.js'
 import userRoutes from './routes/user.routes.js'
 
 // app config
+const serverMessage = `Server running in port: ${PORT}`
 const app = express()
+app.use(morgan('dev'))
 app.use(removeHeader('x-powered-by')) // remove express header
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -19,17 +23,23 @@ app.get('/isAlive', (req, res) => res.status(200)
 app.use('/api', userRoutes)
 app.use('/api', categoryRoutes)
 app.use('/api', postRoutes)
+app.use((req, res) => res.status(404)
+  .json({ error: 'Not found' }))
+
+// Error handler
+app.use((err, req, res, next) => {
+  console.log(err.message)
+  console.log(serverMessage)
+  res.status(err.status || 500)
+    .json({ error: err.message || 'Internal server error' })
+})
 
 // run server
-app.use((x, res) => res.status(404)
-  .json({ error: 'Not found' }))
-const message = `Server running in port: ${PORT}`
-app.listen(3000, () => console.log(message))
+app.listen(3000, () => console.log(serverMessage))
 
 // preguntas para la clase:
 // - dotenv solo se instala para desarrollo?
 // - conventions when adding foreign key restrictions
-// - cómo compruebo que el cuerpo tenga un JSON válido
 // - diferencia entre query() y execute()
 
 // TODO: agregar archivo log de errores

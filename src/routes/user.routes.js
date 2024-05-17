@@ -4,23 +4,23 @@ import {
   getUserByID,
   getUserByUsername,
   getUserByEmail
-} from '../controllers/user/user-general.controller.js'
-import { addUser } from '../controllers/user/user-add.controller.js'
-import { deleteUser } from '../controllers/user/user-delete.controller.js'
-import { updateUser } from '../controllers/user/user-update.controller.js'
+} from '../controllers/user/user-GET.controller.js'
+import { addUser } from '../controllers/user/user-POST.controller.js'
+import { deleteUser } from '../controllers/user/user-DELETE.controller.js'
+import { updateUser } from '../controllers/user/user-PATCH.controller.js'
 
 const router = Router()
 
 // GET
 router.get('/users', getUsers)
-router.get('/get-user/:id', getUserByID)
-router.get('/get-user-username/:username', getUserByUsername)
-router.get('/get-user-email/:email', getUserByEmail)
+router.get('/users/id/:id', getUserByID)
+router.get('/users/username/:username', getUserByUsername)
+router.get('/users/email/:email', getUserByEmail)
 // POST
-router.post('/add-user', addUser)
+router.post('/users', addUser)
 // PATCH
-router.patch('/update-user/:id', updateUser)
+router.patch('/users/:id', updateUser)
 // DELETE
-router.delete('/delete-user/:id', deleteUser)
+router.delete('/users/:id', deleteUser)
 
 export default router

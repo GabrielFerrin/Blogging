@@ -1,8 +1,16 @@
 import { pool } from '../../db/db.js'
+import { validateUserEmail } from './user-POST.controller.js'
 
 export const updateUser = async (req, res) => {
-  if (!req.params.id) {
-    res.status(400).json({ message: 'Falta el id del usuario' })
+  // validate parameter name
+  let message = 'No se recibió el id del usuario'
+  if (!req.params.id) return res.status(400).json({ message })
+  // TODO: validate email
+  if (req.body.email) {
+    if (!validateUserEmail(req.body.email)) {
+      message = 'El correo no es válido'
+      return res.status(400).json({ message })
+    }
   }
   // TODO: validate role id
   // TODI: validate country id
@@ -17,13 +25,13 @@ export const updateUser = async (req, res) => {
   try {
     const [result] = await pool.execute(query, values)
     if (!result.affectedRows) {
-      res.status(404).json({ message: 'El usuario no existe' })
-    } else res.sendStatus(200)
+      return res.status(404).json({ message: 'El usuario no existe' })
+    } else return res.sendStatus(204)
   } catch (error) {
     const message = {
       message: 'No se pudo acceder a la base de datos',
       error
     }
-    res.status(500).json({ message })
+    return res.status(500).json({ message })
   }
 }

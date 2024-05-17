@@ -11,32 +11,31 @@ export const addUser = async (req, res) => {
   }
   if (errorList.length) {
     const message = { target: req.body, error: errorList }
-    res.status(400).json(message)
-  } else {
-    // add user
-    req.body.role_id = 2
-    const query = 'INSERT INTO user SET ?'
-    try {
-      const [rows] = await pool.query(query, [req.body])
-      const target = { id: rows.insertId, ...req.body }
-      const message = {
-        message: 'Usuario agregado con exito',
-        target
-      }
-      res.json(message)
-    } catch (error) {
-      const message = {
-        user: req.body,
-        message: 'Error al agregar el usuario a la base de datos',
-        error
-      }
-      res.status(500).json(message)
+    return res.status(400).json(message)
+  }
+  // add user
+  req.body.role_id = 2
+  const query = 'INSERT INTO user SET ?'
+  try {
+    const [rows] = await pool.query(query, [req.body])
+    const target = { id: rows.insertId, ...req.body }
+    const message = {
+      message: 'Usuario agregado con exito',
+      target
     }
+    return res.json(message)
+  } catch (error) {
+    const message = {
+      user: req.body,
+      message: 'Error al agregar el usuario a la base de datos',
+      error
+    }
+    return res.status(500).json(message)
   }
 }
 
 // validate user
-async function validateUser (user, errorList) {
+const validateUser = async (user, errorList) => {
 // validate received data
   validateUserLocal(user, errorList)
   // validate duplicates in database
@@ -48,7 +47,7 @@ async function validateUser (user, errorList) {
 }
 
 // validate users in database
-async function validateUserDB (user, errorList) {
+const validateUserDB = async (user, errorList) => {
 // validate username
   if (!Object.keys(user).length) return
   let query = 'SELECT * FROM user WHERE username = ?'
@@ -80,7 +79,7 @@ async function validateUserDB (user, errorList) {
 }
 
 // validate user local
-function validateUserLocal (user, errorList) {
+const validateUserLocal = async (user, errorList) => {
   if (!user.username) {
     errorList.push('a username is required')
   }
@@ -101,9 +100,13 @@ function validateUserLocal (user, errorList) {
   }
   // validate email
   if (user.email) {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (!re.test(String(user.email).toLowerCase())) {
+    if (!validateUserEmail(user.email)) {
       errorList.push('el correo \'' + user.email + '\' no es válido')
     }
   }
+}
+
+export const validateUserEmail = async (email) => {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return re.test(String(email).toLowerCase())
 }
