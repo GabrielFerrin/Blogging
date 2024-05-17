@@ -72,7 +72,7 @@ CREATE TABLE
 -- FOREIGN KEYS
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE `use`r ADD CONSTRAINT `fk_user_country_id` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `user` ADD CONSTRAINT `fk_user_country_id` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE `comment` ADD CONSTRAINT `fk_comment_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 

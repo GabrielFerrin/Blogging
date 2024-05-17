@@ -1,15 +1,4 @@
-import { pool } from '../db/db.js'
-
-// GET | /users
-export const getUsers = async (req, res) => {
-  try {
-    const [rows] = await pool.execute('SELECT * FROM user')
-    res.json({ message: rows })
-  } catch (error) {
-    const message = 'No se pudo acceder a la base de datos'
-    res.status(500).json({ message })
-  }
-}
+import { pool } from '../../db/db.js'
 
 // POST | /add-user
 export const addUser = async (req, res) => {
@@ -20,25 +9,34 @@ export const addUser = async (req, res) => {
   } catch (error) {
     errorList.push(error.message)
   }
-  const message = { data: req.body, error: errorList }
-  if (errorList.length) res.status(400).json(message)
-  else {
+  if (errorList.length) {
+    const message = { target: req.body, error: errorList }
+    res.status(400).json(message)
+  } else {
     // add user
     req.body.role_id = 2
     const query = 'INSERT INTO user SET ?'
     try {
-      const [rows] = await pool.execute(query, [req.body])
-      res.json({ message: 'Usuario agregado con éxito', rows })
+      const [rows] = await pool.query(query, [req.body])
+      const target = { id: rows.insertId, ...req.body }
+      const message = {
+        message: 'Usuario agregado con exito',
+        target
+      }
+      res.json(message)
     } catch (error) {
-      const message = 'Error al agregar el usuario a la base de datos'
-      res.status(500).json({ message, error })
+      const message = {
+        user: req.body,
+        message: 'Error al agregar el usuario a la base de datos',
+        error
+      }
+      res.status(500).json(message)
     }
   }
 }
 
 // validate user
 async function validateUser (user, errorList) {
-  // validate body
 // validate received data
   validateUserLocal(user, errorList)
   // validate duplicates in database
@@ -71,7 +69,7 @@ async function validateUserDB (user, errorList) {
     query = 'SELECT * FROM user WHERE email = ?'
     try {
       const [rows] = await pool.execute(query, [user.email])
-      const message = `el coreo '${user.email}' ya existe`
+      const message = `el correo '${user.email}' ya existe`
       if (rows.length) errorList.push(message)
     } catch (error) {
       const message = 'No se pudo acceder a la base de datos' +
