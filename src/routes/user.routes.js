@@ -6,7 +6,7 @@ import {
   getUserByEmail
 } from '../controllers/user/user-get.controller.js'
 import { addUser } from '../controllers/user/user-post.controller.js'
-import { deleteUser } from '../controllers/user/user-delete.controller.js'
+// import { deleteUser } from '../controllers/user/user-delete.controller.js'
 import { updateUser } from '../controllers/user/user-patch.controller.js'
 
 const router = Router()
@@ -21,6 +21,6 @@ router.post('/', addUser)
 // PATCH
 router.patch('/:id', updateUser)
 // DELETE
-router.delete('/:id', deleteUser)
+// router.delete('/:id', deleteUser)
 
 export default router
