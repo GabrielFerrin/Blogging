@@ -17,6 +17,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.text())
 
+app.use('/', express.static('dist'))
+
 // routes
 app.get('/isAlive', (req, res) => res.status(200)
   .json({ alive: true }))
