@@ -20,7 +20,7 @@ app.use(express.text())
 // routes
 app.get('/isAlive', (req, res) => res.status(200)
   .json({ alive: true }))
-app.use('/api', userRoutes)
+app.use('/api/users', userRoutes)
 app.use('/api', categoryRoutes)
 app.use('/api', postRoutes)
 app.use((req, res) => res.status(404)
@@ -34,14 +34,4 @@ app.use((err, req, res, next) => {
     .json({ error: err.message || 'Internal server error' })
 })
 
-// run server
-app.listen(3000, () => console.log(serverMessage))
-
-// preguntas para la clase:
-// - dotenv solo se instala para desarrollo?
-// - conventions when adding foreign key restrictions
-// - diferencia entre query() y execute()
-
-// TODO: agregar archivo log de errores
-// TODO: desplegar con https://render.com/
-// TODO: agregar CORS
+export default app

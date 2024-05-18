@@ -12,15 +12,15 @@ import { updateUser } from '../controllers/user/user-PATCH.controller.js'
 const router = Router()
 
 // GET
-router.get('/users', getUsers)
-router.get('/users/id/:id', getUserByID)
-router.get('/users/username/:username', getUserByUsername)
-router.get('/users/email/:email', getUserByEmail)
+router.get('/', getUsers)
+router.get('/id/:id', getUserByID)
+router.get('/username/:username', getUserByUsername)
+router.get('/email/:email', getUserByEmail)
 // POST
-router.post('/users', addUser)
+router.post('/', addUser)
 // PATCH
-router.patch('/users/:id', updateUser)
+router.patch('/:id', updateUser)
 // DELETE
-router.delete('/users/:id', deleteUser)
+router.delete('/:id', deleteUser)
 
 export default router
