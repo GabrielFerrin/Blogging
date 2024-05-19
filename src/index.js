@@ -1,11 +1,6 @@
-import express from 'express'
+import app from './app'
 
 const PORT = 3000
-const app = express() 
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
 
 const serverMessage = `Server running in port: ${PORT}`
 app.listen(3000, () => console.log(serverMessage))
