@@ -4,7 +4,6 @@ import morgan from 'morgan'
 import { PORT } from './config.js'
 import removeHeader from './middleware.js'
 // routes imports
-import categoryRoutes from './routes/category.routes.js'
 import postRoutes from './routes/post.routes.js'
 import userRoutes from './routes/user.routes.js'
 
@@ -23,7 +22,6 @@ app.use('/', express.static('dist'))
 app.get('/isAlive', (req, res) => res.status(200)
   .json({ alive: true }))
 app.use('/api/users', userRoutes)
-app.use('/api', categoryRoutes)
 app.use('/api', postRoutes)
 app.use((req, res) => res.status(404)
   .json({ error: 'Not found' }))
