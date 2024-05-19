@@ -1,4 +1,5 @@
 import app from './app.js'
+import {} from './routes/user-router.js'
 
 const PORT = 3000
 
