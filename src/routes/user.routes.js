@@ -11,7 +11,7 @@ import { deleteUser } from '../controllers/user/user-delete.controller.js'
 
 const router = Router()
 
-// GET
+// GET | /users
 router.get('/', getUsers)
 router.get('/id/:id', getUserByID)
 router.get('/username/:username', getUserByUsername)
