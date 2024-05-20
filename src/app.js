@@ -2,7 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 // routes
 import userRoutes from './routes/user.routes.js'
-import { validateOrigin } from './helpers.js'
+import { validateCORS } from './helpers.js'
 
 // app config
 const app = express()
@@ -10,7 +10,7 @@ app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: true })) // enables body parsing
 app.use(express.json())
 app.use(express.text())
-app.use(validateOrigin)
+app.use(validateCORS)
 
 // routes
 app.get('/api/isAlive', (req, res) =>

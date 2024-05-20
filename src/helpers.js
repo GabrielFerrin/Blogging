@@ -11,10 +11,11 @@ export const fileError = (err, req, res, next) => {
   }
 }
 
-export const validateOrigin = (req, res, next) => {
+export const validateCORS = (req, res, next) => {
   const allowedOrigins = ['localhost:3000', 'blogging-ih1l.onrender.com']
   const origin = req.headers.origin || req.headers.host
-  console.log('Origin:', origin)
+  console.log('Origin:', req.headers.origin || '')
+  console.log('Host: ', req.headers.host || '')
   if (!allowedOrigins.includes(origin)) {
     return res.status(400).json({ message: 'Origin not allowed' })
   }
