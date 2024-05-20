@@ -13,7 +13,8 @@ export const updateUser = async (req, res) => {
     }
   }
   // TODO: validate role id
-  // TODI: validate country id
+  // TODO: validate country id
+
   const { id } = req.params
   // get keys for query
   const queryParams = Object.keys(req.body)

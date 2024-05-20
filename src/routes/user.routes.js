@@ -6,8 +6,8 @@ import {
   getUserByEmail
 } from '../controllers/user/user-GET.controller.js'
 import { addUser } from '../controllers/user/user-POST.controller.js'
-import { deleteUser } from '../controllers/user/user-DELETE.controller.js'
 import { updateUser } from '../controllers/user/user-PATCH.controller.js'
+import { deleteUser } from '../controllers/user/user-DELETE.controller.js'
 
 const router = Router()
 
