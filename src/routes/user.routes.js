@@ -4,10 +4,10 @@ import {
   getUserByID,
   getUserByUsername,
   getUserByEmail
-} from '../controllers/user/user-get.controller.js'
-import { addUser } from '../controllers/user/user-post.controller.js'
-import { updateUser } from '../controllers/user/user-patch.controller.js'
-import { deleteUser } from '../controllers/user/user-delete.controller.js'
+} from '../controllers/user/user-GET.controller.js'
+import { addUser } from '../controllers/user/user-POST.controller.js'
+import { updateUser } from '../controllers/user/user-PATCH.controller.js'
+import { deleteUser } from '../controllers/user/user-DELETE.controller.js'
 
 const router = Router()
 

@@ -1,5 +1,5 @@
 import { pool } from '../../db/db.js'
-import { validateUserEmail } from './user-post.controller.js'
+import { validateUserEmail } from './user-POST.controller.js'
 
 export const updateUser = async (req, res) => {
   // validate parameter name
