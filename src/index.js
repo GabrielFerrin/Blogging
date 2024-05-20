@@ -1,7 +1,5 @@
 import app from './app.js'
-import {} from './routes/user.routes.js'
-
-const PORT = 3000
+import { PORT } from './config.js'
 
 const serverMessage = `Server running in port: ${PORT}`
 app.listen(3000, () => console.log(serverMessage))
