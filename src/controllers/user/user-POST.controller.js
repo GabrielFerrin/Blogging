@@ -106,7 +106,16 @@ const validateUserLocal = async (user, errorList) => {
   }
 }
 
-export const validateUserEmail = async (email) => {
+export const validateUserEmail = (email) => {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(String(email).toLowerCase())
+}
+
+//  profile picture
+export const getProfilePicture = async (req, res) => {
+  res.send('OK')
+}
+
+export const getPdfFile = async (req, res) => {
+  res.send('OK')
 }

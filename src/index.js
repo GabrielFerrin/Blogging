@@ -10,5 +10,5 @@ app.listen(3000, () => console.log(serverMessage))
 // - diferencia entre query() y execute()
 
 // TODO: agregar archivo log de errores
-// TODO: desplegar con https://render.com/
 // TODO: agregar CORS
+// TODO: agregar validación de correo repetido en update

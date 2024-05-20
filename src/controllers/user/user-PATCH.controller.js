@@ -5,13 +5,16 @@ export const updateUser = async (req, res) => {
   // validate parameter name
   let message = 'No se recibió el id del usuario'
   if (!req.params.id) return res.status(400).json({ message })
-  // TODO: validate email
+  // validate email format
   if (req.body.email) {
+    console.log(req.body.email)
+    console.log(!validateUserEmail(req.body.email))
     if (!validateUserEmail(req.body.email)) {
       message = 'El correo no es válido'
       return res.status(400).json({ message })
     }
   }
+  // TODO: validate email not reapeated in database
   // TODO: validate role id
   // TODO: validate country id
 
