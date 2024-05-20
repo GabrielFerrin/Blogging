@@ -17,5 +17,6 @@ app.use(express.text())
 app.get('/isAlive', (req, res) => res.status(200)
   .send({ alive: true }))
 app.use('/api/users', userRoutes)
+app.use('*', (req, res) => res.status(404).send({ error: 'Incorrect route' }))
 
 export default app
